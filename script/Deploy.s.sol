@@ -12,20 +12,10 @@ contract DeployScript is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         // トークンのデプロイ
-        SecurityToken token = new SecurityToken(
-            "Security Token",
-            "SEC",
-            1000000e18
-        );
+        SecurityToken token = new SecurityToken("Security Token", "SEC", 1000000e18);
 
         // クラウドセールのデプロイ
-        STOCrowdsale crowdsale = new STOCrowdsale(
-            100,
-            0.1 ether,
-            10 ether,
-            7 days,
-            address(token)
-        );
+        STOCrowdsale crowdsale = new STOCrowdsale(100, 0.1 ether, 10 ether, 7 days, address(token));
 
         // クラウドセールコントラクトをホワイトリストに追加
         token.addToWhitelist(address(crowdsale));

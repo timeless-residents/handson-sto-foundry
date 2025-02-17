@@ -16,8 +16,6 @@ contract STOTest is Test {
         owner = address(this);
         investor1 = address(0x1);
         investor2 = address(0x2);
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        address deployer = vm.addr(deployerPrivateKey);
 
         // トークンのデプロイ
         token = new SecurityToken("Security Token", "SEC", 1000000e18);
@@ -33,12 +31,12 @@ contract STOTest is Test {
 
         // クラウドセールコントラクトをホワイトリストに追加
         token.addToWhitelist(address(crowdsale));
-        // オーナー（deployer）もホワイトリストに追加
-        token.addToWhitelist(deployer);
+        // テストコントラクト（オーナー）もホワイトリストに追加
+        token.addToWhitelist(address(this));
+
         // クラウドセールコントラクトにトークンを移転
         token.transfer(address(crowdsale), 500000e18);
     }
-
     function testInvestment() public {
         // 投資家をホワイトリストに追加
         token.addToWhitelist(investor1);
