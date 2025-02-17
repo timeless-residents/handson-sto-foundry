@@ -37,6 +37,7 @@ contract STOTest is Test {
         // クラウドセールコントラクトにトークンを移転
         token.transfer(address(crowdsale), 500000e18);
     }
+
     function testInvestment() public {
         // 投資家をホワイトリストに追加
         token.addToWhitelist(investor1);
